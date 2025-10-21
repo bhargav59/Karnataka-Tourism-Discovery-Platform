@@ -21,9 +21,7 @@
   ],
   "author": "Karnataka Tourism Discovery",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.15",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
     "formidable": "^3.5.2",
@@ -37,6 +35,6 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.15"
+    "tailwindcss": "^3.4.18"
   }
 }
