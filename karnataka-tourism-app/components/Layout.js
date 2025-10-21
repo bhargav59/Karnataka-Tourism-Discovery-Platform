@@ -1,10 +1,15 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../lib/translations";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Layout({ children }) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -18,18 +23,19 @@ export default function Layout({ children }) {
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
+            <div className="flex items-center gap-4">
               <Link href="/" className="text-xl font-bold text-blue-600">
-                Karnataka Tourism
+                {t.home.title}
               </Link>
-              <nav className="hidden md:flex ml-10 space-x-8">
+              <LanguageSwitcher />
+              <nav className="hidden md:flex ml-6 space-x-8">
                 <Link
                   href="/attractions"
                   className={`text-gray-900 hover:text-blue-600 ${
                     router.pathname === "/attractions" ? "font-medium" : ""
                   }`}
                 >
-                  Attractions
+                  {t.nav.attractions}
                 </Link>
                 <Link
                   href="/temples"
@@ -37,7 +43,7 @@ export default function Layout({ children }) {
                     router.pathname === "/temples" ? "font-medium" : ""
                   }`}
                 >
-                  Temples
+                  {t.nav.temples}
                 </Link>
                 <Link
                   href="/quirky"
@@ -45,7 +51,7 @@ export default function Layout({ children }) {
                     router.pathname === "/quirky" ? "font-medium" : ""
                   }`}
                 >
-                  Quirky Places
+                  {t.nav.quirky}
                 </Link>
                 <Link
                   href="/modern"
@@ -53,7 +59,7 @@ export default function Layout({ children }) {
                     router.pathname === "/modern" ? "font-medium" : ""
                   }`}
                 >
-                  Modern Attractions
+                  {t.nav.modern}
                 </Link>
               </nav>
             </div>
@@ -65,7 +71,7 @@ export default function Layout({ children }) {
               >
                 <input
                   type="text"
-                  placeholder="Search attractions..."
+                  placeholder={t.search.placeholder}
                   className="px-3 py-1 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -94,13 +100,13 @@ export default function Layout({ children }) {
                 href="/login"
                 className="text-gray-600 hover:text-gray-900 mr-4"
               >
-                Login
+                {t.nav.login}
               </Link>
               <Link
                 href="/signup"
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Sign Up
+                {t.nav.signup}
               </Link>
             </div>
           </div>
@@ -113,67 +119,74 @@ export default function Layout({ children }) {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-lg font-bold mb-4">Karnataka Tourism</h3>
+              <h3 className="text-lg font-bold mb-4">{t.home.title}</h3>
               <p className="text-gray-400">
-                Discover the spiritual, cultural, and quirky attractions of
-                Karnataka.
+                {language === "kn"
+                  ? "ಕರ್ನಾಟಕದ ಆಧ್ಯಾತ್ಮಿಕ, ಸಾಂಸ್ಕೃತಿಕ ಮತ್ತು ವಿಶಿಷ್ಟ ಆಕರ್ಷಣೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ."
+                  : "Discover the spiritual, cultural, and quirky attractions of Karnataka."}
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Explore</h4>
+              <h4 className="font-semibold mb-4">
+                {language === "kn" ? "ಅನ್ವೇಷಿಸಿ" : "Explore"}
+              </h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/temples" className="hover:text-white">
-                    Temples
+                    {t.nav.temples}
                   </Link>
                 </li>
                 <li>
                   <Link href="/quirky" className="hover:text-white">
-                    Quirky Places
+                    {t.nav.quirky}
                   </Link>
                 </li>
                 <li>
                   <Link href="/modern" className="hover:text-white">
-                    Modern Attractions
+                    {t.nav.modern}
                   </Link>
                 </li>
                 <li>
                   <Link href="/itineraries" className="hover:text-white">
-                    Itineraries
+                    {language === "kn" ? "ಪ್ರವಾಸ ಯೋಜನೆಗಳು" : "Itineraries"}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Company</h4>
+              <h4 className="font-semibold mb-4">
+                {language === "kn" ? "ಕಂಪನಿ" : "Company"}
+              </h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="/about" className="hover:text-white">
-                    About Us
+                    {t.footer.aboutUs}
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-white">
-                    Contact
+                    {t.footer.contactUs}
                   </Link>
                 </li>
                 <li>
                   <Link href="/privacy" className="hover:text-white">
-                    Privacy Policy
+                    {t.footer.privacyPolicy}
                   </Link>
                 </li>
                 <li>
                   <Link href="/terms" className="hover:text-white">
-                    Terms of Service
+                    {t.footer.termsOfService}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Connect</h4>
+              <h4 className="font-semibold mb-4">
+                {language === "kn" ? "ಸಂಪರ್ಕ" : "Connect"}
+              </h4>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white">
                   <span className="sr-only">Facebook</span>
@@ -221,10 +234,7 @@ export default function Layout({ children }) {
           </div>
 
           <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-            <p>
-              © {new Date().getFullYear()} Karnataka Tourism Discovery. All
-              rights reserved.
-            </p>
+            <p>{t.footer.copyright}</p>
           </div>
         </div>
       </footer>

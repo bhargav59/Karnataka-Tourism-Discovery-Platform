@@ -25,8 +25,11 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.15",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "formidable": "^3.5.2",
     "jsonwebtoken": "^9.0.2",
     "next": "^15.5.6",
+    "next-cloudinary": "^6.15.1",
     "pg": "^8.16.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

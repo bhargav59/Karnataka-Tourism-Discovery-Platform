@@ -1,8 +1,9 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
-const JWT_EXPIRY = process.env.JWT_EXPIRY || '7d';
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_EXPIRY = process.env.JWT_EXPIRY || "7d";
 
 /**
  * Hash password using bcrypt
@@ -23,11 +24,9 @@ export async function comparePassword(password, hash) {
  * Generate JWT token
  */
 export function generateToken(userId) {
-  return jwt.sign(
-    { userId, iat: Math.floor(Date.now() / 1000) },
-    JWT_SECRET,
-    { expiresIn: JWT_EXPIRY }
-  );
+  return jwt.sign({ userId, iat: Math.floor(Date.now() / 1000) }, JWT_SECRET, {
+    expiresIn: JWT_EXPIRY,
+  });
 }
 
 /**
@@ -37,7 +36,7 @@ export function verifyToken(token) {
   try {
     return jwt.verify(token, JWT_SECRET);
   } catch (error) {
-    throw new Error('Invalid or expired token');
+    throw new Error("Invalid or expired token");
   }
 }
 
@@ -45,12 +44,12 @@ export function verifyToken(token) {
  * Extract user from authorization header
  */
 export function getUserFromToken(authHeader) {
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return null;
   }
 
   const token = authHeader.substring(7);
-  
+
   try {
     const decoded = verifyToken(token);
     return decoded.userId;
@@ -67,9 +66,9 @@ export function requireAuth(handler) {
     const userId = getUserFromToken(req.headers.authorization);
 
     if (!userId) {
-      return res.status(401).json({ 
+      return res.status(401).json({
         success: false,
-        message: 'Authentication required' 
+        message: "Authentication required",
       });
     }
 
@@ -86,9 +85,9 @@ export function requireAdmin(handler) {
     const userId = getUserFromToken(req.headers.authorization);
 
     if (!userId) {
-      return res.status(401).json({ 
+      return res.status(401).json({
         success: false,
-        message: 'Authentication required' 
+        message: "Authentication required",
       });
     }
 
@@ -112,20 +111,29 @@ export function validateEmail(email) {
  */
 export function validatePassword(password) {
   if (password.length < 8) {
-    return { valid: false, message: 'Password must be at least 8 characters' };
+    return { valid: false, message: "Password must be at least 8 characters" };
   }
-  
+
   if (!/[A-Z]/.test(password)) {
-    return { valid: false, message: 'Password must contain at least one uppercase letter' };
+    return {
+      valid: false,
+      message: "Password must contain at least one uppercase letter",
+    };
   }
-  
+
   if (!/[a-z]/.test(password)) {
-    return { valid: false, message: 'Password must contain at least one lowercase letter' };
+    return {
+      valid: false,
+      message: "Password must contain at least one lowercase letter",
+    };
   }
-  
+
   if (!/[0-9]/.test(password)) {
-    return { valid: false, message: 'Password must contain at least one number' };
+    return {
+      valid: false,
+      message: "Password must contain at least one number",
+    };
   }
-  
+
   return { valid: true };
 }
