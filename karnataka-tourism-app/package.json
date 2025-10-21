@@ -1,7 +1,7 @@
 {
   "name": "karnataka-tourism-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Karnataka Tourism Discovery Platform - Discover temples, modern attractions, and quirky places",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -12,15 +12,23 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "karnataka",
+    "tourism",
+    "temples",
+    "travel",
+    "india"
+  ],
+  "author": "Karnataka Tourism Discovery",
   "license": "ISC",
   "type": "module",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.15",
     "next": "^15.5.6",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
