@@ -1,131 +1,149 @@
 # Karnataka Tourism Discovery Platform
 
-This repository contains the complete end-to-end web application for the Karnataka Tourism Discovery Platform, based on the Product Requirements Document (PRD).
+A comprehensive web platform for discovering Karnataka's spiritual, cultural, and quirky attractions. Built with Next.js, React, and Tailwind CSS.
 
-## Project Overview
+## 🌟 Features
 
-The Karnataka Tourism Discovery Platform is a comprehensive digital platform for discovering Karnataka's diverse attractions - from ancient temples and pilgrimage sites to modern quirky landmarks and offbeat experiences. The platform serves as the "RoadsideAmerica.com meets Temple Guide" for Karnataka.
-
-## Features Implemented
-
-### Phase 1: MVP (Months 0-3)
-- ✅ Attraction Listing & Discovery
-- ✅ Attraction Detail Pages
-- ✅ User Authentication (Login/Signup)
-- ✅ Basic Admin Panel
-
-### Phase 2: Community & Engagement (Months 4-6)
-- ✅ User Reviews & Ratings (UI implemented)
-- ✅ User-Generated Content (UI implemented)
-- ✅ Interactive Features (Favorites, Profile)
-
-### Additional Features
+### Phase 1 (MVP) - Currently Implemented
+- ✅ Attraction listing and discovery with filters
+- ✅ Detailed attraction pages with comprehensive information
+- ✅ User authentication (signup, login, logout)
 - ✅ Search functionality
-- ✅ Category-based browsing (Temples, Quirky Places, Modern Attractions)
-- ✅ Blog system
-- ✅ Responsive design for all devices
-- ✅ About, Contact, Privacy Policy, and Terms of Service pages
+- ✅ Favorites/Wishlist system
+- ✅ User reviews and ratings
+- ✅ Responsive design (mobile-first)
+- ✅ SEO optimization with schema markup
+- ✅ Reusable components (AttractionCard, FilterPanel, ReviewCard, SearchBar, GoogleMap)
 
-## Technology Stack
+### Phase 2-3 (Next Steps)
+- 🔄 Database integration (PostgreSQL/Supabase)
+- 🔄 Itinerary planner with route optimization
+- 📋 Events & festivals calendar
+- 📋 Admin panel enhancements
+- 📋 Monetization features
 
-- **Frontend**: Next.js, React, Tailwind CSS
-- **Backend**: Next.js API Routes
-- **Database**: PostgreSQL (planned for full implementation)
-- **Authentication**: NextAuth.js (planned for full implementation)
-- **Deployment**: Vercel
-
-## Project Structure
-
-```
-karnataka-tourism-app/
-├── components/        # Reusable React components
-├── contexts/          # React context providers
-├── lib/               # Utility functions and libraries
-├── pages/             # Next.js pages and API routes
-├── public/            # Static assets
-├── styles/            # Global styles and Tailwind config
-└── types/             # TypeScript type definitions (if using TypeScript)
-```
-
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js (version 14 or higher)
-- npm or yarn
+- Node.js 18+ and npm/yarn
+- PostgreSQL database (or Supabase/Neon account)
+- Google Maps API key
+- (Optional) Cloudinary or AWS S3 for image storage
 
 ### Installation
 
-1. Navigate to the project directory:
-   ```bash
-   cd karnataka-tourism-app
-   ```
+1. **Clone the repository**
+```bash
+git clone git@github.com:bhargav59/Karnataka-Tourism-Discovery-Platform.git
+cd Karnataka-Tourism-Discovery-Platform/karnataka-tourism-app
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+2. **Install dependencies**
+```bash
+npm install
+```
 
-### Development
+3. **Set up environment variables**
+```bash
+cp .env.example .env.local
+```
 
-To run the development server:
+Edit `.env.local` with your configuration:
+```env
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_super_secret_jwt_key_min_32_characters
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
+4. **Run the development server**
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-### Building for Production
+## 📁 Project Structure
 
-To create a production build:
-
-```bash
-npm run build
+```
+karnataka-tourism-app/
+├── components/          # Reusable React components
+│   ├── Layout.js       # Main layout wrapper
+│   ├── AttractionCard.js
+│   ├── FilterPanel.js
+│   ├── ReviewCard.js
+│   ├── SearchBar.js
+│   ├── GoogleMap.js
+│   └── SEOHead.js
+├── contexts/           # React Context providers
+│   └── AuthContext.js
+├── lib/               # Utility functions
+│   ├── api.js         # API client
+│   ├── schema.js      # Schema.org data
+│   └── db/schema.js   # Database schema
+├── pages/             # Next.js pages & API routes
+│   ├── api/          # API endpoints
+│   │   ├── auth/     # Authentication
+│   │   ├── attractions.js
+│   │   ├── search.js
+│   │   ├── favorites.js
+│   │   ├── reviews.js
+│   │   └── itineraries.js
+│   ├── attractions/
+│   ├── itineraries/
+│   └── admin/
+├── public/            # Static assets
+└── styles/            # Global styles
 ```
 
-To start the production server:
+## 🔌 API Endpoints
 
-```bash
-npm start
-```
+### Public
+- `GET /api/attractions` - List attractions
+- `GET /api/search?q=query` - Search
+- `GET /api/reviews?attraction_id=:id` - Get reviews
 
-## Database Schema
+### Authenticated
+- `POST /api/auth/signup|login|logout` - Auth
+- `GET /api/auth/me` - Current user
+- `POST /api/favorites` - Add favorite
+- `POST /api/reviews` - Create review
+- `POST /api/itineraries` - Create itinerary
 
-The database schema is defined in `lib/db/schema.js` and includes tables for:
-- Users
-- Attractions
-- Temple details
-- Photos
-- Reviews
-- Favorites
-- Itineraries
-- User submissions
+See `.env.example` for full configuration options.
 
-## API Endpoints
+## 🎨 Key Components
 
-API endpoints are defined in the `pages/api/` directory:
-- `/api/attractions` - List and manage attractions
-- `/api/auth/*` - Authentication endpoints (planned)
-- `/api/favorites` - Manage user favorites (planned)
+All components are in `components/` directory and include:
+- **AttractionCard** - Display attraction in grid/list
+- **FilterPanel** - Filter by type, district, category
+- **ReviewCard** - Display user reviews with ratings
+- **SearchBar** - Search with autocomplete suggestions
+- **GoogleMap** - Display locations with markers & directions
+- **SEOHead** - SEO meta tags and schema markup
 
-## Deployment
+## 📚 Documentation
 
-The application is ready for deployment to Vercel or any other Next.js hosting platform.
+- [Product Requirements Document](../karnataka-tourism-prd.md) - Complete PRD with all phases
+- [Database Schema](lib/db/schema.js) - Full database structure
+- [API Documentation](#-api-endpoints) - All endpoints listed above
 
-## Future Enhancements
+## 🚢 Deployment
 
-Based on the PRD, future phases will include:
-- Route & Itinerary Planner
-- Events & Festivals Calendar
-- Monetization Features
-- Mobile App (PWA)
-- Advanced Search & AI Features
+### Vercel (Recommended)
+1. Push to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy
 
-## Contributing
+## 🗺️ Roadmap
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+See [PRD](../karnataka-tourism-prd.md) for detailed roadmap with timelines.
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
+ISC License
+
+---
+
+**Built with ❤️ for Karnataka Tourism**
